@@ -1,26 +1,29 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const sitesController = require('./Database/Controller/sitesController.js');
-const pagesController = require('./Database/Controller/pagesController.js');
-const clickController = require('./Database/Controller/clickController.js');
-const scrollController = require('./Database/Controller/scrollController.js');
-let clientData = 1;
+const clickController = require('./database/controller/clickController.js');
+const scrollController = require('./database/controller/scrollController.js');
+const recordingController = require('./database/controller/recordingController.js')
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-var jwt = require('jsonwebtoken');
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
-const uuid = require('uuid/v4');
-const secret = uuid();
+const session = require('express-session');
 const mongoose = require('mongoose');
-var mensch = require('mensch');
-let mongoURI = 'mongodb://jerryjong:codesmith123@ds127173.mlab.com:27173/private-i';
+mongoose.Promise = require('bluebird');
+
+let mongoURI = 'mongodb://localhost:27017/mydb';
+
+// require('./passport')(passport); //pass passport for configuration
+
 
 mongoose.connect(mongoURI);
 
 
-const Guest = require('./Database/Model/guestModel.js');
+const Click = require('./database/model/clickModel');
+const Scroll = require('./database/model/scrollModel');
+const Recording = require('./database/model/recordingModel.js')
+
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -28,29 +31,108 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', express.static(__dirname + './../'));
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'));
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '/index.html'))
+})
+
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, '/index.html'))
+})
+
 app.get('/logo.png', (req, res) => {
     res.sendFile(path.join(__dirname, 'logo.png'));
-
 })
+
+app.get('/screenshot.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'screenshot.png'))
+})
+
+app.get('/websiteicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'websiteicon.png'));
+})
+
+app.get('/databaseicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'databaseicon.png'))
+})
+
+app.get('/machinelearningicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'machinelearningicon.png'))
+})
+
+app.get('/stockexample.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/stockexample.png'))
+})
+
+app.get('/welcomelogo.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'welcomelogo.png'))
+})
+
+app.get('/public/1.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/1.png'))
+})
+
+app.get('/public/2.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/2.png'))
+})
+
+app.get('/public/3.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/3.png'))
+})
+
+app.get('/public/4.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/4.png'))
+})
+
+app.get('/public/5.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/5.png'))
+})
+
+app.get('/public/6.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/6.png'))
+})
+
+app.get('/public/7.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/7.png'))
+})
+
+app.get('/public/8.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/8.png'))
+})
+
+app.get('/public/9.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/9.png'))
+})
+
+function isLoggedIn(req, res, next) {
+    console.log('checking token...')
+    jwt.verify(req.cookies.token, secret,
+        function (err, decoded) {
+            if (err) {
+                res.send(err)
+                res.redirect('/signup');
+            } else {
+                console.log('good token')
+                return next();
+            }
+        }
+    )
+};
+
 
 app.get('/dashboard', (req, res) => {
+    console.log('sending....');
     res.sendFile(path.join(__dirname, '/index.html'));
 })
 
-app.get('/dashboard/sites', (req, res) => {
+app.get('/dashboard/:recordingID', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'));
-})
-
-
-app.get('/dashboard/sites/pages', (req, res) => {
-    res.sendfile('index.html')
 })
 
 app.get('/script.js', (req, res, next) => {
@@ -60,97 +142,53 @@ app.get('/script.js', (req, res, next) => {
 app.get('*/build/bundle.js', (req, res, next) => {
     res.sendfile('./build/bundle.js');
 })
-app.post('/guestauth', (req, res, next) => {
-    console.log("token",req.body.token);
-    console.log("url",req.body.url)
-    try { 
-        let token = jwt.verify(req.body.token,"cats")
-        console.log("json",token);
-        if(token.page[token.page.length-1] !== req.body.url){
-            console.log("inside");
-            token.page.push(req.body.url);
-            res.json({
-                token:jwt.sign(token,"cats")
-            })
-        }
-        else{
-            console.log("Sdasd");
-            res.send("preauth");
-        }
-        //search database
-    } catch (err) {
-        console.log(err);
-        //make new guest
-        newGuest = {
-            _id: uuid(),
-            time: Date.now(),
-        };
-        Guest.create({
-            newGuest
-        }, (err, guest) => {
-            if (guest) {
-                newGuest.page = [req.body.url];
-                console.log("newGURET",newGuest);
-                var token = jwt.sign(newGuest, "cats");
-                res.json({
-                    token: token
-                });
-            }
-        })
-    }
-})
-app.get('/gethtml', (req, res, next) => {
-    console.log("CLient");
-    console.log(clientData)
-    let css = mensch.parse(clientData.header)
-    let cssString = mensch.stringify(css)
-    fs.writeFileSync('./src/styles/html.css',cssString);
-    res.send(clientData)
-})
-app.get('/deletehtml', (req, res, next) => {
-    console.log("delete");
-    fs.unlinkSync("./src/styles/html.css")
-    res.sendStatus(200);
-})
 
-app.get('/sites', sitesController.getSites);
+app.get('/recordings',recordingController.findAll)
+app.get('/recordings/:recordingID', recordingController.findRecording)
 
-app.post('/sites', sitesController.createSites);
-
-app.get('/pages', pagesController.getPages);
-
-app.post('/pages', pagesController.createPages);
-
-
-io.on('connection', (client) => {
+io.on('connection', (client) => { 
     client.on('join', (data) => {
-        clientData = data;
+        console.log(data);
         client.emit('messages', 'Hello from server');
-    })
-    client.on('storeClick', (data) => {
-        let mappedClick = clickController.mapClick(data);
-        clickController.createClick(mappedClick)
-            .then((response) => {
-                client.emit('clickResponse', response);
-            })
-            .catch((response) => {
-                client.emit('clickResponse', response);
+    });
+    client.on('html', (data) => {
+        recordingController.createRecording(data)
+            .then((Response) => {
+                console.log("Html",Response);
+            }).catch((err) => {
+                console.log(err);
             })
     })
-    client.on('storeScroll', (data) => {
-        scrollController.createScroll(data)
-            .then((response)=>{
-                client.emit('scrollResponse', response)
-            })
-            .catch((response)=>{
-                client.emit('scrollResponse', response)
-            })
-        
+    client.on('recording', (id,data) => {
+        let result = data.map(function(element) {
+            return Object.values(element)[0]
+        });
+        console.log('RECORDING',result);
+        recordingController.updateRecordingBulk(id,result)
+           .then((Response) => {
+               console.log("Response",Response)
+            }).catch((err) => {
+               console.log(err)
+           })
+    });
+    client.on('unload', (id,data,lastitem) => {
 
+        let result = data.map(function(element) {
+            return Object.values(element)[0]
+        });
+        console.log("Last Item",lastitem);
+        console.log("RESULT",result);
+        recordingController.updateRecordingBulk(id,result)
+            .then((Response) => {
+                //console.log("Unload", Response)
+            }).catch((err) => {
+                //console.log(err)
+            })
+    })
+    client.on('event',(data)=>{
+        console.log('EVENT',data);
     })
 })
 
-
+// server.listen(3000, '192.168.0.66');
 server.listen(3000);
-
-module.exports = clientData;

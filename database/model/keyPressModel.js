@@ -1,9 +1,9 @@
 // const mongoose = require("mongoose");
 // const Schema = mongoose.Schema;
 
-// const clickSchema = Schema({
-//     clickX: {
-//         type: Number,
+// const keyPressSchema = Schema({
+//     target: {
+//         target: Number,
 //         required: true
 //     },
 //     clickY: {

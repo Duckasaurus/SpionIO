@@ -1,27 +1,8 @@
 window.onload = (() => {
-    var token = getCookie("token");
-    $.post("http://localhost:3000/guestauth", {
-        token: token,
-        url:window.location.href 
-    }, (data) => {
-        if (data !== "preauth") {
-            document.cookie = "token=" + data.token;
-        }else{
-            console.log(data);
-        }
-
-    });
     const socket = io.connect("http://localhost:3000/");
     socket.on('connect', (data) => {
-        $.get(document.getElementsByTagName('link')[0].href, (text) => {
-            let html = {
-                header: text,
-                body: document.getElementsByTagName('body')[0].innerHTML,
-            }
-            socket.emit('join', html);
+            socket.emit('join', "joining with server");
         });
-
-    });
     socket.on('messages', (data) => {
         console.log('message', data);
     })
@@ -32,17 +13,26 @@ window.onload = (() => {
         console.log('scrollResponse', data);
     })
     if (document.readyState === 'complete') {
+
+
         //////////////////// click data retrieval ////////////////////
         window.addEventListener("click", (e) => {
-            const click = {
-                clickX: e.clientX,
-                clickY: e.clientY,
-                width: document.documentElement.clientWidth,
-                height: document.documentElement.clientHeight
+            let sy = window.pageYOffset;
+            let sx = window.pageXOffset;
+            const clickToken = {
+                clickX: e.clientX  + sx,
+                clickY: e.clientY + sy,
+                documentWidth: document.documentElement.clientWidth,
+                documentHeight: document.documentElement.clientHeight,
+                windowWidth: window.innerWidth,
+                windowHeigth: window.innerHeight,
+                token: getCookie("token"),
             };
-            console.log(click);
-            socket.emit('storeClick', click)
+            console.log(clickToken);
+            socket.emit('storeClick', clickToken)
         }, false);
+
+
 
 
         //////////////////// scroll data retrieval ////////////////////
@@ -83,3 +73,4 @@ function getCookie(cname) {
     }
     return "";
 }
+

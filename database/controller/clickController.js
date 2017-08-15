@@ -1,30 +1,26 @@
-const Click = require('./../Model/clickModel.js')
+const Click = require('./../model/clickModel.js')
 const clickController = {};
-const appWidth = 900;
-const appHeight = 900;
+var jwt = require('jsonwebtoken');
+const secret = "cats"
 
-clickController.mapClick = (data) => {
-    if (data.width < appWidth) {
-        //scale down width
-        data.clickX *= appWidth / data.width;
-    } else {
-        //scale up width
-        data.clickX /= data.width / appWidth
-    }
-    if (data.height < appHeight) {
-        //scale down height
-        data.clickY *= appHeight / data.height;
-    } else {
-        //scale up height
-        data.clickY /= data.height / appHeight;
-    }
-    return data;
-}
 
-clickController.createClick = (data) => {
-    return Click.create({
-            clickX: data.clickX,
-            clickY: data.clickY
+clickController.updateClick = (data) => {
+    let sessionID = jwt.verify(data.token, secret);
+    return Site.findOne({_id:sessionID},(err,foundSession)=>{
+        if(err) throw err;
+        Click.findOne({_id:foundSession.clickID},(err,foundClick) =>{
+            if(err) throw err;
+            foundClick.clickX.push(data.clickX),
+            foundClick.clickY.push(data.clickY),
+            foundClick.documentWidth.push(data.documentWidth),
+            foundClick.documentHeight.push(data.documentHeight),
+            foundClick.windowWidth.push(data.windowWidth),
+            foundClick.windowHeigth.push(data.windowHeight)
+            foundClick.save((err,response) =>{
+                if(err) throw err
+                return response
+            })
         })
+    }) 
 }
 module.exports = clickController;

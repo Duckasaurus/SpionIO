@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 /////////// import components ///////////
 import Documentation from './Documentation.js';
 import Dashboard from './Dashboard.js';
+import DashboardUserSession from './DashboardUserSession.js';
 
 
 /////////// import stylesheets ///////////
@@ -17,20 +18,23 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class App extends Component { 
   render() {
     return(
-      <div>
+
+      <Router>
+
+      <div> 
         <MuiThemeProvider>
           <Route exact path='/' component={Documentation}/>
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <Route path='/login' component={Documentation}/>
+          <Route exact path='/dashboard' component={Dashboard}/>
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <Route path='/signup' component={Documentation}/>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <Route path='/dashboard' component={Dashboard}/>
+          <Route exact path='/dashboard/:recordingID' component={DashboardUserSession}/>
         </MuiThemeProvider>
       </div>
+
+      </Router>
+
     )
   }
 }

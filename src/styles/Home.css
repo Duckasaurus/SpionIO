@@ -1,5 +1,6 @@
 .page-content {
-  margin-left: 260px;
+  margin-left: 254px;
+  background-color: #F4F7F5;
   /* padding-top: 60px; */
 }
 
@@ -7,3 +8,108 @@
   text-align: center;
   padding-top: 60px;
 }
+
+.dashboard-title {
+  padding-left: 25px;
+  padding-top: 15px;
+  margin: 0 auto;
+  font-weight: lighter;
+  text-align: left;
+}
+
+.dashboard-page {
+  background-color: #F4F7F5;
+  height: 960px;
+  text-align: center;
+}
+
+.dashboard-logo {
+  height: 40px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  background-color: #006CAA;
+  font-weight: lighter;
+  color: #006CAA;
+}
+
+.dashboard-welcome {
+  margin-top: 15px;
+  width: 100%;
+  height: 18%;
+  text-align: center;
+  background-color: white;
+}
+
+.nav-first {
+  padding-left: 15%;
+}
+
+
+.dashboard-header {
+  height: 60px;
+}
+
+.dashboard-header-toolbar {
+  margin: 0 auto;
+}
+
+.iframe {
+  height: 2000px;
+}
+
+/* ///////////////////////////////////
+   /////////////Dashboard/////////// */
+
+.recording-title {
+   margin: 0 auto;
+   color: #1B2228;
+   font-size: .8em;
+}
+
+.recording-sub {
+   margin-top: 3px; 
+   color: gray;
+   font-size: .7em;
+}
+
+.recording-description {
+  float: left;
+  margin-left: 5%;
+}
+
+.recording-avatar {
+  float: left;
+  margin-left: 2%;
+}
+
+.recording-icon {
+  height: 30px;
+  width: 30px;
+  margin-left: 2px;
+  color: #006CAA;
+}
+
+.recording-playback {
+  float: right;
+  margin-right: 55%;
+}
+
+.recording-block {
+  width: 40%;
+  float: left;
+  margin-top: 1.5%;
+}
+
+.recording-latest-updates {
+  margin-left: 1px;
+  overflow: scroll;
+  height: 630px;
+  width: 1020px;
+  float: right;
+}
+
+.user-session { 
+  float: right;
+}
+
+

@@ -1,15 +1,25 @@
 .App-title, h3{
   text-align: center;
-  color: #006CAA;
+  color: black;
   padding-top: 15px;
-  font-family: 'Inconsolata', monospace;
+  /* font-family: 'Inconsolata', monospace; */
   width: 100%;
+}
+
+h2 {
+  /* color: #006CAA; */
+  /* margin: 0 auto; */
+  text-align: center;
+}
+
+h4 {
+  margin: 0 auto;
 }
 
 .App-logo {
   margin-top: 45px;
   height: 20%;
-  width: 20%;
+  width: 50%;
 }
 
 .logo-div {
@@ -17,9 +27,14 @@
   width: 100%;
 }
 
-p {
-  width: 50%;
-  margin-left: 25%;
+.td-title {
+  letter-spacing: 3px;
+}
+
+.td-sub {
+  width: 80%;
+  margin-left: 10%;
+  letter-spacing: 1px;
 }
 
 table {
@@ -27,16 +42,69 @@ table {
   margin-top: 100px;
 }
 
-.mini-logo {
+.mini-logo-database {
   height: 100px;
   width: 100px;
   display: inline-block;
 }
 
-td {
+.mini-logo-machinelearning {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+}
+
+.mini-logo-website {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+}
+
+.dashboard-screenshot {
+  margin-top: 60px;
+  width: 60%;
+}
+
+.td-welcome {
   text-align: center;
   align-content: center;
   width: 33%;
+}
+
+.dashboard-welcome-table {
+  margin: 0 auto;
+}
+
+.dashboard-welcome-td {
+  width: 25%;
+  text-align: center;
+  align-content: center;
+}
+
+.app-text {
+  font-size: 22px;
+}
+
+.dashboard-welcome-p {
+  width: 60%;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.dashboard-welcome-display {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.dashboard-welcome-stat {
+  margin: 0 auto;
+  font-size: 32px;
+}
+
+.dashboard-graph-1 {
+  background-color: white;
+  width: 50%;
 }
 
 h1 {
@@ -48,23 +116,27 @@ hr {
   margin: 0 auto;
 }
 
-.covered {
-  font-style: italic;
-}
+
 html, body {
   margin: 0;
 }
 
 .scroll {
   text-align: center;
-  padding-top: 200px;
+  padding-top: 100px;
+}
+
+#section1 {
+  /* background-color: #E63946; */
+  height: 640px;
+  margin-top: 1px;
 }
 
 #section2 {
   background-color: #EDEDED;
   text-align: center;
   margin: 0 auto;
-  height: 1000px;
+  height: 1300px;
 }
 
 #section07 .a {

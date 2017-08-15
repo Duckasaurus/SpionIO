@@ -18,25 +18,24 @@ class Welcome extends Component {
 
 
   render() {
-    console.log("WELCOME");
     return (
       <div>
         <div id="page-content" className="App-header">
+          <div id='section1'>
           <div className='logo-div'>
-          <img className='App-logo' src='./../../logo.png'/>
+          <img className='App-logo' src='./../../welcomelogo.png'/>
           </div>
 
           <div className="App-title">
-            <h1>THE IDEAL</h1><br/><br/><h1>FULL-STACK ANALYTICS</h1><br/><br/><h1>FOR DEVELOPERS</h1>
+            <h1 className='app-text'>THE IDEAL FRONT-END</h1><br/><br/><h1 className='app-text'>FOCUS GROUP MANAGEMENT PLATFORM</h1><br/><br/><h1 className='app-text'>FOR DEVELOPERS</h1>
           </div>
 
           <div className='scroll demo' id='section07'>
-            {/* <Link className='a test1' activeClass="active" to="test1" spy={true} smooth={true} duration={500}> */}
             <a className='a' onClick={() => scroll.scrollTo(1005)}>
               <span></span><span></span><span></span>
             </a>
-            {/* </Link> */}
-            <br/><br/><br/><br/><br/>GET STARTED
+            <br/>GET STARTED
+          </div>
           </div>
 
 
@@ -48,30 +47,31 @@ class Welcome extends Component {
           <h1>QUICK-START GUIDE</h1>
           <table>
             <tr>
-              <td>
-                <img className='mini-logo' src='./../../logo.png'/>
-                <h3>START BUILDING A BETTER SITE</h3>
+              <td className='.td-welcome'>
+                <img className='mini-logo-website' src='./../../websiteicon.png'/>
+                <h3>BUILD BETTER SITES</h3>
                 <p className='td-sub'>Signing up gives you full access and control to all of our analytical features that include gathering user interaction in the form of mouse, scroll, time, and funnel data</p>
               </td>
-              <td>
-                <img className='mini-logo' src='./../../logo.png'/>
+              <td className='.td-welcome'>
+                <img className='mini-logo-database' src='./../../databaseicon.png'/>
                 <h3>STAY IN CONTROL</h3>
                 <p className='td-sub'>After you sign up, start by adding sites and embedding our script into your HTML pages. Right away, you'll begin to receieve detailed insight into real user client-side interaction</p>
               </td>
-              <td>
-                <img className='mini-logo' src='./../../logo.png'/>                
-                <h3>CONSISTENTLY IMPROVE UX/UI</h3>
+              <td className='.td-welcome'>
+                <img className='mini-logo-machinelearning' src='./../../machinelearningicon.png'/>                
+                <h3>RESPONSIVELY IMPROVE UX/UI</h3>
                 <p className='td-sub'>Our advanced machine learning algorithms simulate user behavior and generate fix recommendations to place the most optimal interface at the tip of your fingers</p>
               </td>
             </tr>
           </table>
 
-          <br/><br/><br/><br/><hr width='85%'/>
+          <br/><br/><br/><br/><hr width='85%'/><br/><br/><br/><br/>
 
+          <h1>LIGHTWEIGHT INTUITIVE DASHBOARD</h1><br/>
+
+          <img className='dashboard-screenshot' src='./../../screenshot.png'/>
             
           </div> 
-
-          <br/><br/><br/><br/><br/><br/>
 
         </div>
       </div>
