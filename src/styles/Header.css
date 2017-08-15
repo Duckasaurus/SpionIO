@@ -3,23 +3,27 @@
 }
 
 #first {
-   margin-left: 60%; 
+   margin-left: 50%; 
+   /* margin-left: 55%; FOR MONITOR VIEW*/
    display: inline;
 }
 
 
 .topnav {
-    background-color: white;
     overflow: hidden;
     width: 100%;
     margin: 0;
     padding: 0;
+    height: 80px;
+    position: fixed;
+    z-index: 100;
 }
 
-/*.topnav-content {
-  margin: 0px auto;
-  width: 960px;
-}*/
+.topnav-content {
+  margin-top: 1%;
+}
+
+
 ul {
   margin-left: 0;
   padding-left: 0;
@@ -29,8 +33,12 @@ ul {
 .logo {
   height: 50px;
   width: 50px;
-  margin-left: 100px;
+  margin-left: 5%;
   vertical-align: middle;
+}
+
+.active {
+  background-color: #20262D;
 }
 
 

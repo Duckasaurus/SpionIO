@@ -1,5 +1,6 @@
 .page-content {
-  margin-left: 260px;
+  margin-left: 254px;
+  background-color: #F4F7F5;
   /* padding-top: 60px; */
 }
 
@@ -23,10 +24,12 @@
 }
 
 .dashboard-logo {
-  height: 52px;
-  padding-top: 28px;
+  height: 40px;
+  padding-top: 15px;
+  padding-bottom: 5px;
   background-color: #006CAA;
-  color: white;
+  font-weight: lighter;
+  color: #006CAA;
 }
 
 .dashboard-welcome {
@@ -38,13 +41,12 @@
 }
 
 .nav-first {
-  padding-left: 30%;
+  padding-left: 15%;
 }
 
 
 .dashboard-header {
   height: 60px;
-  vertical-align: middle;
 }
 
 .dashboard-header-toolbar {
@@ -54,3 +56,60 @@
 .iframe {
   height: 2000px;
 }
+
+/* ///////////////////////////////////
+   /////////////Dashboard/////////// */
+
+.recording-title {
+   margin: 0 auto;
+   color: #1B2228;
+   font-size: .8em;
+}
+
+.recording-sub {
+   margin-top: 3px; 
+   color: gray;
+   font-size: .7em;
+}
+
+.recording-description {
+  float: left;
+  margin-left: 5%;
+}
+
+.recording-avatar {
+  float: left;
+  margin-left: 2%;
+}
+
+.recording-icon {
+  height: 30px;
+  width: 30px;
+  margin-left: 2px;
+  color: #006CAA;
+}
+
+.recording-playback {
+  float: right;
+  margin-right: 55%;
+}
+
+.recording-block {
+  width: 40%;
+  float: left;
+  margin-top: 1.5%;
+}
+
+.recording-latest-updates {
+  margin-left: 1px;
+  overflow: scroll;
+  height: 630px;
+  width: 1020px;
+  float: right;
+}
+
+.user-session { 
+  float: right;
+}
+
+

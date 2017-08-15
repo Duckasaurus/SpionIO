@@ -1,30 +1,4 @@
 window.onload = (() => {
-    let pageInfo = {
-        token: getCookie("token"),
-        url: window.location.href,
-        html: {
-            css: document.getElementsByTagName('link')[0].href,
-            body: document.getElementsByTagName('body')[0].innerHTML
-        }
-    };
-    console.log(pageInfo.url);
-    $.ajax({
-        type:"POST",
-        url:"http://localhost:3000/guestauth",
-        data: JSON.stringify(pageInfo),
-        contentType: 'application/json; charset=UTF-8',
-        success: (response) =>{
-            if(response !== 'preauth'){
-                document.cookie = "token=" + response.token;    
-            }
-            else{
-                console.log(response)
-            }
-        },
-        error: (err) =>{
-            console.log(err);
-        } 
-    });
     const socket = io.connect("http://localhost:3000/");
     socket.on('connect', (data) => {
             socket.emit('join', "joining with server");
@@ -99,3 +73,4 @@ function getCookie(cname) {
     }
     return "";
 }
+

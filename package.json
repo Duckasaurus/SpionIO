@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon server.js",
-    "webpack": "./node_modules/.bin/webpack -w"
+    "webpack": "./node_modules/.bin/webpack -w",
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
     "async-reactor": "^1.2.1",
@@ -16,8 +17,10 @@
     "babel": "^6.23.0",
     "bcrypt": "^1.0.2",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "browserify-fs": "^1.0.0",
+    "chai": "^4.1.1",
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.0",
     "express": "^4.15.3",
@@ -27,11 +30,15 @@
     "htmlparser": "^1.7.7",
     "htmlparser2": "^3.9.2",
     "iframe-resizer": "^3.5.14",
+    "immutable": "^3.8.1",
     "jQuery": "^1.7.4",
+    "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",
     "material-ui-search-bar": "^0.3.0",
     "mensch": "^0.3.3",
+    "mocha": "^3.5.0",
     "mongoose": "^4.11.4",
+    "nock": "^9.0.14",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
@@ -45,8 +52,10 @@
     "react-router-dom": "^4.1.2",
     "react-tap-event-plugin": "^2.0.1",
     "sass": "^1.0.0-beta.2",
+    "sinon": "^3.2.0",
     "socket.io": "^2.0.3",
     "socketio-jwt": "^4.5.0",
+    "superagent": "^3.5.2",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

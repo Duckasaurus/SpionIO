@@ -21,21 +21,21 @@ class Welcome extends Component {
     return (
       <div>
         <div id="page-content" className="App-header">
+          <div id='section1'>
           <div className='logo-div'>
           <img className='App-logo' src='./../../welcomelogo.png'/>
           </div>
 
           <div className="App-title">
-            <h1>THE IDEAL FRONT-END</h1><br/><br/><h1>FOCUS GROUP MANAGEMENT PLATFORM</h1><br/><br/><h1>FOR DEVELOPERS</h1>
+            <h1 className='app-text'>THE IDEAL FRONT-END</h1><br/><br/><h1 className='app-text'>FOCUS GROUP MANAGEMENT PLATFORM</h1><br/><br/><h1 className='app-text'>FOR DEVELOPERS</h1>
           </div>
 
           <div className='scroll demo' id='section07'>
-            {/* <Link className='a test1' activeClass="active" to="test1" spy={true} smooth={true} duration={500}> */}
             <a className='a' onClick={() => scroll.scrollTo(1005)}>
               <span></span><span></span><span></span>
             </a>
-            {/* </Link> */}
-            <br/><br/><br/><br/><br/>GET STARTED
+            <br/>GET STARTED
+          </div>
           </div>
 
 

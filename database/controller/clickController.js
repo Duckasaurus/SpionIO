@@ -1,5 +1,4 @@
 const Click = require('./../model/clickModel.js')
-const Site = require('./../model/sitesModel.js')
 const clickController = {};
 var jwt = require('jsonwebtoken');
 const secret = "cats"
